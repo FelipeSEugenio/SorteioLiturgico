@@ -98,12 +98,31 @@
     }
 }
 
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+}
+
 /* ==========================================================================
    ESTILOS RESPONSIVOS
    ========================================================================== */
 
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
+    html {
+        font-size: 90%;
+    }
+
     .status-message {
         bottom: 0.5rem;
         right: 0.5rem;

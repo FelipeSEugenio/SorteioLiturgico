@@ -129,9 +129,10 @@ function updateParticipantList() {
         return;
     }
     
-    participants.forEach(name => {
+    participants.forEach((name, index) => {
         const item = document.createElement('div');
-        item.className = 'flex items-center justify-between p-3 rounded-lg border bg-neutral-50 border-neutral-200';
+        item.className = 'flex items-center justify-between p-3 rounded-lg border bg-neutral-50 border-neutral-200 animate-slide-in-left';
+        item.style.animationDelay = `${index * 100}ms`;
         
         item.innerHTML = `
             <div class="flex items-center gap-3">
@@ -286,7 +287,7 @@ function displayResults(assignments) {
     readingsContainer.className = 'space-y-4';
     if (readings.length > 0) {
         const readingTitle = document.createElement('h3');
-        readingTitle.className = 'text-lg font-semibold text-primary-700 border-b-2 border-primary-200 pb-2';
+        readingTitle.className = 'text-lg font-semibold text-azul-real border-b-2 border-azul-celeste pb-2';
         readingTitle.textContent = 'Leituras';
         readingsContainer.appendChild(readingTitle);
         readings.forEach((item, index) => readingsContainer.appendChild(createResultItem(item, index)));
@@ -298,7 +299,7 @@ function displayResults(assignments) {
     monitionsContainer.className = 'space-y-4';
     if (monitions.length > 0) {
         const monitionTitle = document.createElement('h3');
-        monitionTitle.className = 'text-lg font-semibold text-amber-700 border-b-2 border-amber-200 pb-2';
+        monitionTitle.className = 'text-lg font-semibold text-marrom-terroso border-b-2 border-bege-claro pb-2';
         monitionTitle.textContent = 'Monições';
         monitionsContainer.appendChild(monitionTitle);
         monitions.forEach((item, index) => monitionsContainer.appendChild(createResultItem(item, index)));
@@ -319,25 +320,25 @@ function createResultItem(assignment, index) {
 
     switch (type) {
         case 'gospel':
-            cardClasses += ' bg-accent-gold/10 border-accent-gold';
+            cardClasses += ' bg-dourado/10 border-dourado';
             iconName = 'crown';
-            iconClasses = 'text-accent-gold';
-            titleColor = 'text-accent-gold-dark';
-            participantColor = 'text-gray-800';
+            iconClasses = 'text-dourado';
+            titleColor = 'text-dourado';
+            participantColor = 'text-marrom-terroso';
             break;
         case 'reading':
-            cardClasses += ' bg-primary-50 border-primary-500';
+            cardClasses += ' bg-azul-celeste/10 border-azul-celeste';
             iconName = 'book-open';
-            iconClasses = 'text-primary-600';
-            titleColor = 'text-primary-800';
-            participantColor = 'text-primary-700';
+            iconClasses = 'text-azul-celeste';
+            titleColor = 'text-azul-real';
+            participantColor = 'text-azul-real';
             break;
         case 'monition':
-            cardClasses += ' bg-amber-50 border-amber-500';
+            cardClasses += ' bg-bege-claro border-marrom-terroso';
             iconName = 'message-circle';
-            iconClasses = 'text-amber-600';
-            titleColor = 'text-amber-800';
-            participantColor = 'text-amber-700';
+            iconClasses = 'text-marrom-terroso';
+            titleColor = 'text-marrom-terroso';
+            participantColor = 'text-marrom-terroso';
             break;
     }
 
@@ -397,7 +398,7 @@ function showStatus(message, type) {
     
     statusText.textContent = message;
     statusMessage.className = `fixed bottom-4 right-4 z-50 ${
-        type === 'error' ? 'bg-red-600' : 'bg-primary-600'
+        type === 'error' ? 'bg-red-600' : 'bg-azul-real'
     } text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2`;
     
     statusMessage.classList.remove('hidden');
@@ -413,7 +414,13 @@ function saveScreenshot() {
         return;
     }
     
-    html2canvas(document.body).then(canvas => {
+    const resultsSection = document.getElementById('results-section');
+    if (!resultsSection) {
+        showStatus('Não foi possível encontrar a seção de resultados.', 'error');
+        return;
+    }
+    
+    html2canvas(resultsSection).then(canvas => {
         const link = document.createElement('a');
         link.download = `sorteio_liturgico_${new Date().toISOString().split('T')[0]}.png`;
         link.href = canvas.toDataURL();

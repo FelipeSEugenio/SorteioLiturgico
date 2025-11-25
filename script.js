@@ -291,7 +291,7 @@ function displayResults(assignments) {
     readingsContainer.className = 'space-y-4';
     if (readings.length > 0) {
         const readingTitle = document.createElement('h3');
-        readingTitle.className = 'text-lg font-semibold text-azul-real border-b-2 border-azul-celeste pb-2';
+        readingTitle.className = 'text-lg font-semibold text-verde-oliva border-b-2 border-verde-oliva/50 pb-2';
         readingTitle.textContent = 'Leituras';
         readingsContainer.appendChild(readingTitle);
         readings.forEach((item, index) => readingsContainer.appendChild(createResultItem(item, index)));
@@ -303,7 +303,7 @@ function displayResults(assignments) {
     monitionsContainer.className = 'space-y-4';
     if (monitions.length > 0) {
         const monitionTitle = document.createElement('h3');
-        monitionTitle.className = 'text-lg font-semibold text-marrom-terroso border-b-2 border-bege-claro pb-2';
+        monitionTitle.className = 'text-lg font-semibold text-marrom-cafe border-b-2 border-marrom-cafe/50 pb-2';
         monitionTitle.textContent = 'Monições';
         monitionsContainer.appendChild(monitionTitle);
         monitions.forEach((item, index) => monitionsContainer.appendChild(createResultItem(item, index)));
@@ -324,25 +324,25 @@ function createResultItem(assignment, index) {
 
     switch (type) {
         case 'gospel':
-            cardClasses += ' bg-dourado/10 border-dourado';
+            cardClasses += ' bg-cobre/10 border-cobre';
             iconName = 'crown';
-            iconClasses = 'text-dourado';
-            titleColor = 'text-dourado';
-            participantColor = 'text-marrom-terroso';
+            iconClasses = 'text-cobre';
+            titleColor = 'text-cobre';
+            participantColor = 'text-marrom-cafe';
             break;
         case 'reading':
-            cardClasses += ' bg-azul-celeste/10 border-azul-celeste';
+            cardClasses += ' bg-verde-oliva/10 border-verde-oliva';
             iconName = 'book-open';
-            iconClasses = 'text-azul-celeste';
-            titleColor = 'text-azul-real';
-            participantColor = 'text-azul-real';
+            iconClasses = 'text-verde-oliva';
+            titleColor = 'text-verde-oliva';
+            participantColor = 'text-marrom-cafe';
             break;
         case 'monition':
-            cardClasses += ' bg-bege-claro border-marrom-terroso';
+            cardClasses += ' bg-creme border-marrom-cafe';
             iconName = 'message-circle';
-            iconClasses = 'text-marrom-terroso';
-            titleColor = 'text-marrom-terroso';
-            participantColor = 'text-marrom-terroso';
+            iconClasses = 'text-marrom-cafe';
+            titleColor = 'text-marrom-cafe';
+            participantColor = 'text-marrom-cafe';
             break;
     }
 
@@ -402,7 +402,7 @@ function showStatus(message, type) {
     
     statusText.textContent = message;
     statusMessage.className = `fixed bottom-4 right-4 z-50 ${
-        type === 'error' ? 'bg-red-600' : 'bg-azul-real'
+        type === 'error' ? 'bg-red-600' : 'bg-verde-oliva'
     } text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2`;
     
     statusMessage.classList.remove('hidden');

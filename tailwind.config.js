@@ -14,14 +14,12 @@ tailwind.config = {
                 'sans': ['Inter', 'sans-serif'],
             },
             colors: {
-                'azul-real': '#1A2E6A',
-                'dourado': '#C8A54B',
-                'bege-claro': '#F2E9D8',
-                'branco-luminoso': '#FFFFFF',
-                'marrom-terroso': '#6A4F38',
-                'azul-celeste': '#5F8CCB',
-                'azul-noite': '#0D1B3E',
-                // Mantendo a paleta neutra existente para uso geral, mas priorizando as novas cores específicas.
+                'creme': '#F5F5DC',
+                'marrom-cafe': '#4B3832',
+                'verde-oliva': '#556B2F',
+                'cobre': '#B87333',
+                'azul-petroleo': '#008080',
+                // Mantendo a paleta neutra existente para uso geral.
                 neutral: {
                     '0': '#ffffff',
                     '50': '#f8f7f6',

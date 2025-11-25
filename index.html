@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorteio Litúrgico - Versão Corrigida</title>
+    <title>Sorteio Litúrgico - Versão Final Completa</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <!-- Google Fonts -->
@@ -20,148 +20,105 @@
     <!-- html2canvas for screenshot -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'serif': ['Cormorant Garamond', 'serif'],
-                        'sans': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        },
-                        accent: {
-                            gold: '#f59e0b',
-                        },
-                        neutral: {
-                            0: '#ffffff',
-                            50: '#f9fafb',
-                            100: '#f3f4f6',
-                            200: '#e5e7eb',
-                            300: '#d1d5db',
-                            400: '#9ca3af',
-                            500: '#6b7280',
-                            600: '#4b5563',
-                            700: '#374151',
-                            800: '#1f2937',
-                            900: '#111827',
-                        },
-                    },
-                },
-            },
-        };
-    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
     
-    <style>
-        /* Force result visibility */
-        #resultList {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            width: 100% !important;
-        }
-        
-        .result-item {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            background: linear-gradient(to right, #eff6ff, #dbeafe) !important;
-            border: 1px solid #bfdbfe !important;
-            border-radius: 0.75rem !important;
-            min-height: 80px !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        .result-item-content {
-            display: flex !important;
-            align-items: center !important;
-            gap: 0.75rem !important;
-            width: 100% !important;
-        }
-        
-        .result-item-icon {
-            width: 1.25rem !important;
-            height: 1.25rem !important;
-            flex-shrink: 0 !important;
-        }
-        
-        .result-item-text {
-            flex: 1 !important;
-        }
-        
-        .result-position {
-            font-weight: 600 !important;
-            color: #111827 !important;
-            font-size: 1.125rem !important;
-            margin-bottom: 0.25rem !important;
-        }
-        
-        .result-participant {
-            color: #2563eb !important;
-            font-weight: 500 !important;
-            font-size: 1rem !important;
-            margin-bottom: 0.25rem !important;
-        }
-        
-        .result-reference {
-            color: #6b7280 !important;
-            font-size: 0.875rem !important;
-            margin-top: 0.25rem !important;
-        }
-    </style>
+    <!-- Tailwind CSS Configuration -->
+    <script src="tailwind.config.js"></script>
+
 </head>
 
-<body class="bg-gradient-to-br from-primary-50 to-accent-gold/10 min-h-screen font-sans">
-    <main class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-serif font-bold text-primary-800 mb-2">
+<body class="bg-creme min-h-screen font-sans">
+    <header class="fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-r from-verde-oliva to-marrom-cafe text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-serif font-bold mb-2">
                 Sorteio Litúrgico
             </h1>
-            <p class="text-primary-600 font-medium">
-                Nossa Senhora Aparecida - Neocatechumenal Way
+            <p class="font-medium">
+                Caminho Neocatecumental
             </p>
-        </header>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 pt-20 py-8 max-w-4xl">
+
+<section class="bg-white rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold text-marrom-cafe mb-4 flex items-center gap-2">
+                <i data-lucide="book-open"></i>
+                Leituras (Opcional)
+            </h2>
+            <p class="text-sm text-neutral-600 mb-4">
+                Preencha apenas as leituras que serão utilizadas. Campos em branco serão omitidos.
+            </p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm text-neutral-700 mb-1">1ª Leitura</label>
+                    <input type="text" id="reading1" placeholder="Ex: Isaías 55:6-9" 
+                           class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-verde-oliva">
+                </div>
+                <div>
+                    <label class="block text-sm text-neutral-700 mb-1">2ª Leitura</label>
+                    <input type="text" id="reading2" placeholder="Ex: Salmo 145:2-9" 
+                           class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-verde-oliva">
+                </div>
+                <div>
+                    <label class="block text-sm text-neutral-700 mb-1">3ª Leitura</label>
+                    <input type="text" id="reading3" placeholder="Ex: Romanos 8:28-30" 
+                           class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-verde-oliva">
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsible Section (Separado dos Participantes) -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold text-marrom-cafe mb-4 flex items-center gap-2">
+                <i data-lucide="crown"></i>
+                Responsável pelo Evangelho
+            </h2>
+            <p class="text-sm text-neutral-600 mb-4">
+                O responsável NÃO participa do sorteio das leituras e monições.
+            </p>
+            
+            <div class="flex flex-wrap md:flex-nowrap gap-2">
+                <input type="text" id="responsibleInput" placeholder="Nome do responsável"
+                       class="w-full md:flex-1 px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-verde-oliva focus:border-transparent">
+                <button onclick="setResponsible()" class="w-full md:w-auto px-6 py-2 bg-gradient-to-r from-cobre to-orange-600 text-white rounded-lg hover:from-yellow-600 hover:to-dourado transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="check"></i>
+                    Definir
+                </button>
+            </div>
+            
+            <div id="currentResponsible" class="mt-3 hidden">
+                <div class="flex items-center gap-2 px-4 py-2 bg-cobre/10 border-cobre/30 rounded-lg">
+                    <i data-lucide="crown"></i>
+                    <span class="font-medium text-marrom-cafe">Responsável: <span id="responsibleName"></span></span>
+                    <button onclick="clearResponsible()" class="ml-auto text-neutral-500 hover:text-neutral-700">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         <!-- Participants Section -->
-        <section class="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-semibold text-primary-800 flex items-center gap-2">
+                <h2 class="text-marrom-cafe flex">
                     <i data-lucide="users"></i>
-                    Participantes
+                    Participantes do Sorteio
                 </h2>
-                <div class="text-sm text-primary-600">
+                <div class="text-sm text-marrom-cafe">
                     <span id="participantCount">0</span>/7 participantes
+                    <br>
+                    <small class="text-neutral-500">+ 1 responsável (não contado)</small>
                 </div>
             </div>
             
-            <div class="flex gap-2 mb-4">
-                <input 
-                    type="text" 
-                    id="participantInput" 
-                    placeholder="Nome do participante"
-                    class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    onkeypress="handleParticipantInput(event)"
-                >
-                <button 
-                    onclick="addParticipant()"
-                    class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
-                    id="addBtn"
-                >
+            <div class="flex flex-wrap md:flex-nowrap gap-2 mb-4">
+                <input type="text" id="participantInput" placeholder="Nome do participante (exceto responsável)"
+                       class="w-full md:flex-1 px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-verde-oliva focus:border-transparent"
+                       onkeypress="handleParticipantInput(event)">
+                <button onclick="addParticipant()" class="w-full md:w-auto px-6 py-2 bg-gradient-to-r from-verde-oliva to-green-700 text-white rounded-lg hover:from-azul-celeste hover:to-azul-real transition-colors flex items-center justify-center gap-2" id="addBtn">
                     <i data-lucide="plus"></i>
                     Adicionar
                 </button>
@@ -172,48 +129,21 @@
             </div>
         </section>
 
-        <!-- Responsible Selection -->
-        <section class="bg-white rounded-xl shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-semibold text-primary-800 mb-4 flex items-center gap-2">
-                <i data-lucide="user-check"></i>
-                Responsável pelo Evangelho
-            </h2>
-            <p class="text-sm text-neutral-600 mb-4">
-                O responsável NÃO participa do sorteio das leituras e monições
-            </p>
-            <div id="responsibleButtons" class="flex flex-wrap gap-2">
-                <!-- Botões para selecionar responsável -->
-            </div>
-            <div id="currentResponsible" class="mt-3 hidden">
-                <div class="flex items-center gap-2 px-4 py-2 bg-accent-gold/10 border border-accent-gold/30 rounded-lg">
-                    <i data-lucide="crown"></i>
-                    <span class="font-medium text-primary-800">Responsável: <span id="responsibleName"></span></span>
-                    <button onclick="clearResponsible()" class="ml-auto text-neutral-500 hover:text-neutral-700">
-                        <i data-lucide="x"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
 
         <!-- Draw Section -->
-        <section class="bg-white rounded-xl shadow-lg p-6 mb-6">
-            <button 
-                onclick="performDraw()"
-                class="w-full py-4 px-6 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-lg font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                id="drawBtn"
-                disabled
-            >
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
+            <button onclick="performDraw()" class="w-full py-4 px-6 bg-gradient-to-r from-verde-oliva to-green-700 text-white text-lg font-semibold rounded-lg hover:from-azul-celeste hover:to-azul-real transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" id="drawBtn" disabled>
                 <i data-lucide="shuffle"></i>
                 Realizar Sorteio
             </button>
             <p class="text-xs text-neutral-500 text-center mt-2">
-                Mínimo 2 participantes (1 responsável + 1 para sorteio)
+                Mínimo 1 participante do sorteio (responsável não conta)
             </p>
         </section>
 
         <!-- Results Section -->
-        <section class="bg-white rounded-xl shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-semibold text-primary-800 mb-4 flex items-center gap-2">
+        <section id="results-section" class="bg-white rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
+            <h2 class="text-xl font-semibold text-marrom-cafe mb-4 flex items-center gap-2">
                 <i data-lucide="trophy"></i>
                 Resultado do Sorteio
             </h2>
@@ -226,19 +156,13 @@
         </section>
 
         <!-- Actions Section -->
-        <section class="bg-white rounded-xl shadow-lg p-6">
+        <section class="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
             <div class="flex flex-wrap gap-3">
-                <button 
-                    onclick="saveScreenshot()"
-                    class="flex-1 py-3 px-4 bg-accent-gold text-white rounded-lg hover:bg-accent-gold/90 transition-colors flex items-center justify-center gap-2"
-                >
+                <button onclick="saveScreenshot()" class="flex-1 py-3 px-4 bg-gradient-to-r from-cobre to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-cobre transition-colors flex items-center justify-center gap-2">
                     <i data-lucide="download"></i>
                     Salvar Screenshot
                 </button>
-                <button 
-                    onclick="clearAll()"
-                    class="flex-1 py-3 px-4 bg-neutral-600 text-white rounded-lg hover:bg-neutral-700 transition-colors flex items-center justify-center gap-2"
-                >
+                <button onclick="clearAll()" class="flex-1 py-3 px-4 bg-gradient-to-r from-marrom-cafe to-gray-700 text-white rounded-lg hover:bg-marrom-terroso transition-colors flex items-center justify-center gap-2">
                     <i data-lucide="refresh-cw"></i>
                     Limpar Tudo
                 </button>
@@ -247,406 +171,20 @@
 
         <!-- Status Message -->
         <div id="statusMessage" class="fixed bottom-4 right-4 z-50 hidden">
-            <div class="bg-primary-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+            <div class="bg-verde-oliva text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
                 <i data-lucide="check-circle"></i>
                 <span id="statusText"></span>
             </div>
         </div>
     </main>
 
-    <script>
-        // Global variables
-        let participants = [];
-        let responsable = null;
-        let currentDraw = null;
+    <footer class="bg-azul-noite text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p class="text-sm">&copy; 2025 Sorteio Litúrgico. Todos os direitos reservados.</p>
+            <p class="text-xs mt-2">Desenvolvido com fé e tecnologia.</p>
+        </div>
+    </footer>
 
-        // Readings data
-        const readings = [
-            { name: '1ª Leitura', reference: 'Isaías 55:6-9', book: 'Isaías' },
-            { name: '2ª Leitura', reference: 'Salmo 145:2-9', book: 'Salmos' },
-            { name: '3ª Leitura', reference: 'Romanos 8:28-30', book: 'Romanos' },
-            { name: 'Evangelho', reference: 'Mateus 5:1-12', book: 'Mateus' }
-        ];
-
-        // DOM elements
-        const participantInput = document.getElementById('participantInput');
-        const participantsList = document.getElementById('participantsList');
-        const participantCount = document.getElementById('participantCount');
-        const responsibleButtons = document.getElementById('responsibleButtons');
-        const currentResponsible = document.getElementById('currentResponsible');
-        const responsibleName = document.getElementById('responsibleName');
-        const drawBtn = document.getElementById('drawBtn');
-        const resultList = document.getElementById('resultList');
-
-        // Initialize app
-        function initApp() {
-            updateUI();
-            lucide.createIcons();
-        }
-
-        // Handle participant input
-        function handleParticipantInput(event) {
-            if (event.key === 'Enter') {
-                addParticipant();
-            }
-        }
-
-        // Add participant
-        function addParticipant() {
-            const name = participantInput.value.trim();
-            
-            if (!name) {
-                showStatus('Digite o nome do participante', 'error');
-                return;
-            }
-            
-            if (participants.includes(name)) {
-                showStatus('Este nome já foi adicionado', 'error');
-                return;
-            }
-            
-            if (participants.length >= 7) {
-                showStatus('Máximo de 7 participantes atingido', 'error');
-                return;
-            }
-            
-            participants.push(name);
-            participantInput.value = '';
-            updateUI();
-            showStatus('Participante adicionado!', 'success');
-        }
-
-        // Remove participant
-        function removeParticipant(name) {
-            if (name === responsable) {
-                responsable = null;
-                currentResponsible.classList.add('hidden');
-            }
-            
-            participants = participants.filter(p => p !== name);
-            updateUI();
-            showStatus('Participante removido', 'success');
-        }
-
-        // Set responsable
-        function setResponsable(name) {
-            responsable = name;
-            responsibleName.textContent = name;
-            currentResponsible.classList.remove('hidden');
-            updateUI();
-            showStatus('Responsável selecionado!', 'success');
-        }
-
-        // Clear responsable
-        function clearResponsable() {
-            responsable = null;
-            currentResponsible.classList.add('hidden');
-            updateUI();
-        }
-
-        // Update UI
-        function updateUI() {
-            updateParticipantList();
-            updateResponsibleButtons();
-            updateDrawButton();
-            participantCount.textContent = participants.length;
-        }
-
-        // Update participant list
-        function updateParticipantList() {
-            participantsList.innerHTML = '';
-            
-            participants.forEach(name => {
-                const isResponsible = name === responsable;
-                const item = document.createElement('div');
-                item.className = `flex items-center justify-between p-3 rounded-lg border ${
-                    isResponsible 
-                        ? 'bg-accent-gold/10 border-accent-gold/30' 
-                        : 'bg-neutral-50 border-neutral-200'
-                }`;
-                
-                item.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        ${isResponsible ? '<i data-lucide="crown" class="w-4 h-4 text-accent-gold"></i>' : '<i data-lucide="user" class="w-4 h-4 text-neutral-400"></i>'}
-                        <span class="${isResponsible ? 'font-medium text-primary-800' : ''}">${name}</span>
-                        ${isResponsible ? '<span class="text-xs text-accent-gold font-medium">(Responsável)</span>' : ''}
-                    </div>
-                    <button onclick="removeParticipant('${name}')" class="text-neutral-400 hover:text-red-600 transition-colors">
-                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    </button>
-                `;
-                
-                participantsList.appendChild(item);
-            });
-        }
-
-        // Update responsible buttons
-        function updateResponsibleButtons() {
-            responsibleButtons.innerHTML = '';
-            
-            participants.forEach(name => {
-                if (name === responsable) return;
-                
-                const btn = document.createElement('button');
-                btn.className = `px-4 py-2 rounded-lg border transition-colors ${
-                    responsable === name 
-                        ? 'bg-accent-gold text-white border-accent-gold' 
-                        : 'bg-white text-primary-600 border-primary-300 hover:bg-primary-50'
-                }`;
-                btn.textContent = name;
-                btn.onclick = () => setResponsable(name);
-                responsibleButtons.appendChild(btn);
-            });
-        }
-
-        // Update draw button
-        function updateDrawButton() {
-            const canDraw = participants.length >= 2 && responsable;
-            drawBtn.disabled = !canDraw;
-        }
-
-        // ** VERSÃO CORRIGIDA: manter ordem litúrgica **
-        function performFairDrawFixed() {
-            console.log('Realizando sorteio justo (versão corrigida):', participants, 'responsável:', responsable);
-            
-            // APENAS participantes (excluindo responsável) participam do sorteio
-            const participantsForRaffle = participants.filter(p => p !== responsable);
-            console.log('Participantes para o sorteio:', participantsForRaffle);
-            
-            // Validar que temos participantes para sortear
-            if (participantsForRaffle.length === 0) {
-                throw new Error('Nenhum participante disponível para o sorteio');
-            }
-            
-            // Embaralhar participantes para distribuição justa
-            const shuffled = [...participantsForRaffle].sort(() => Math.random() - 0.5);
-            
-            const result = [];
-            
-            // ** 1. ATRIBUIR LEITURAS (apenas para participantes, não para responsável) **
-            const leituras = [
-                { position: '1ª Leitura', type: 'reading', readingIndex: 0 },
-                { position: '2ª Leitura', type: 'reading', readingIndex: 1 },
-                { position: '3ª Leitura', type: 'reading', readingIndex: 2 }
-            ];
-            
-            leituras.forEach((assignment, index) => {
-                const participant = shuffled[index % participantsForRaffle.length];
-                const reading = getReadingDetails(assignment.readingIndex);
-                
-                result.push({
-                    ...assignment,
-                    participant: participant,
-                    reading: reading
-                });
-            });
-            
-            // ** 2. ATRIBUIR EVANGELHO APENAS PARA RESPONSÁVEL **
-            const gospelReading = getReadingDetails(3); // 4ª leitura (índice 3)
-            result.push({
-                position: 'Evangelho',
-                type: 'gospel',
-                participant: responsable,
-                reading: gospelReading
-            });
-            
-            // ** 3. ATRIBUIR MONIÇÕES (apenas para participantes, não para responsável) **
-            const monicoes = [
-                { position: '1ª Monição', type: 'monition', readingIndex: 0 },
-                { position: '2ª Monição', type: 'monition', readingIndex: 1 },
-                { position: '3ª Monição', type: 'monition', readingIndex: 2 },
-                { position: '4ª Monição', type: 'monition', readingIndex: 3 }
-            ];
-            
-            monicoes.forEach((assignment, index) => {
-                const participant = shuffled[index % participantsForRaffle.length];
-                const reading = getReadingDetails(assignment.readingIndex);
-                
-                result.push({
-                    ...assignment,
-                    participant: participant,
-                    reading: reading
-                });
-            });
-            
-            // ** IMPORTANTE: NÃO faz sort aleatório aqui! Mantém a ordem litúrgica **
-            // result.sort() foi REMOVIDO para preservar a ordem correta
-            
-            console.log('Sorteio concluído com resultado (ordem corrigida):', result);
-            return result;
-        }
-
-        function getReadingDetails(index) {
-            return readings[index] || { name: '', reference: '', book: '' };
-        }
-
-        // Display results (simplified version)
-        function displayResultsFixed(assignments) {
-            console.log('Exibindo resultados fixos:', assignments);
-            
-            // Limpar e mostrar resultList
-            resultList.innerHTML = '';
-            resultList.style.display = 'block';
-            resultList.style.visibility = 'visible';
-            resultList.style.opacity = '1';
-            
-            // Validar assignments
-            if (!assignments || !Array.isArray(assignments) || assignments.length === 0) {
-                console.error('Nenhum assignment para exibir');
-                resultList.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 2rem;">Nenhum resultado para exibir</div>';
-                return;
-            }
-            
-            console.log('Criando', assignments.length, 'itens de resultado');
-            
-            // Criar itens
-            const fragment = document.createDocumentFragment();
-            
-            for (let i = 0; i < assignments.length; i++) {
-                try {
-                    const assignment = assignments[i];
-                    console.log(`Criando item ${i + 1}/${assignments.length} para assignment:`, assignment);
-                    
-                    const resultItem = createResultItem(assignment, i);
-                    if (resultItem) {
-                        fragment.appendChild(resultItem);
-                        console.log(`Item ${i + 1} criado e adicionado`);
-                    } else {
-                        console.error(`Falha ao criar item para assignment:`, assignment);
-                    }
-                } catch (error) {
-                    console.error('Erro ao criar assignment:', assignment, error);
-                }
-            }
-            
-            // Adicionar todos os itens de uma vez
-            resultList.appendChild(fragment);
-            console.log('Todos os itens adicionados ao resultList');
-            
-            // Re-inicializar ícones Lucide
-            try {
-                lucide.createIcons();
-                console.log('Ícones Lucide inicializados');
-            } catch (e) {
-                console.warn('Falha na inicialização do Lucide:', e);
-            }
-        }
-
-        function createResultItem(assignment, index) {
-            try {
-                console.log('Criando item de resultado:', assignment);
-                
-                // Validar dados do assignment
-                if (!assignment || !assignment.position || !assignment.participant) {
-                    console.error('Dados inválidos do assignment:', assignment);
-                    return null;
-                }
-                
-                const isMonition = assignment.type === 'monition';
-                const iconName = isMonition ? 'MessageCircle' : 'BookOpen';
-                const iconColor = isMonition ? 'color: #f59e0b;' : 'color: #2563eb;';
-                const reading = assignment.reading || {};
-                const reference = reading.reference || '';
-                
-                const item = document.createElement('div');
-                item.className = 'result-item';
-                
-                item.innerHTML = `
-                    <div class="result-item-content">
-                        <i data-lucide="${iconName}" class="result-item-icon" style="${iconColor}"></i>
-                        <div class="result-item-text">
-                            <div class="result-position">${assignment.position}</div>
-                            <div class="result-participant">${assignment.participant}</div>
-                            ${reference ? `<div class="result-reference">${reference}</div>` : ''}
-                        </div>
-                    </div>
-                `;
-                
-                return item;
-            } catch (error) {
-                console.error('Erro ao criar item de resultado:', error, assignment);
-                return null;
-            }
-        }
-
-        // Perform draw (override the original)
-        function performDraw() {
-            console.log('Iniciando performDraw corrigido');
-            
-            if (participants.length < 2 || participants.length > 7) {
-                showStatus('Número de participantes inválido! Mínimo 2, máximo 7 pessoas.', 'error');
-                return;
-            }
-            
-            if (!responsable) {
-                showStatus('Selecione o responsável pelo Evangelho!', 'error');
-                return;
-            }
-            
-            const availableParticipants = participants.filter(p => p !== responsable);
-            if (availableParticipants.length < 1) {
-                showStatus('Você precisa de pelo menos 2 pessoas: 1 responsável e 1 para sortear as leituras/monições!', 'error');
-                return;
-            }
-            
-            // Usar a função corrigida
-            const assignment = performFairDrawFixed();
-            currentDraw = assignment;
-            displayResultsFixed(assignment);
-            
-            showStatus('Sorteio realizado com sucesso!', 'success');
-        }
-
-        // Utility functions
-        function showStatus(message, type) {
-            const statusMessage = document.getElementById('statusMessage');
-            const statusText = document.getElementById('statusText');
-            
-            statusText.textContent = message;
-            statusMessage.className = `fixed bottom-4 right-4 z-50 ${
-                type === 'error' ? 'bg-red-600' : 'bg-primary-600'
-            } text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2`;
-            
-            statusMessage.classList.remove('hidden');
-            
-            setTimeout(() => {
-                statusMessage.classList.add('hidden');
-            }, 3000);
-        }
-
-        function saveScreenshot() {
-            if (!currentDraw) {
-                showStatus('Realize um sorteio primeiro!', 'error');
-                return;
-            }
-            
-            html2canvas(document.body).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `sorteio_liturgico_${new Date().toISOString().split('T')[0]}.png`;
-                link.href = canvas.toDataURL();
-                link.click();
-                showStatus('Screenshot salvo!', 'success');
-            });
-        }
-
-        function clearAll() {
-            participants = [];
-            responsable = null;
-            currentDraw = null;
-            
-            participantInput.value = '';
-            participantsList.innerHTML = '';
-            responsibleButtons.innerHTML = '';
-            currentResponsible.classList.add('hidden');
-            resultList.innerHTML = '<div class="text-center text-neutral-500 py-8"><i data-lucide="calendar"></i><p>Aguardando sorteio...</p></div>';
-            
-            updateUI();
-            lucide.createIcons();
-            showStatus('Tudo limpo!', 'success');
-        }
-
-        // Initialize app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>

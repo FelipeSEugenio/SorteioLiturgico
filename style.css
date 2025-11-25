@@ -1,0 +1,273 @@
+/*
+ * Sorteio Litúrgico - Estilos Customizados
+ * Neocatechumenal Way - Nossa Senhora Aparecida
+ * 
+ * Este arquivo contém estilos customizados que complementam o Tailwind CSS
+ */
+
+/* ==========================================================================
+   ESTILOS PERSONALIZADOS PARA COMPONENTES ESPECÍFICOS
+   ========================================================================== */
+
+/* Badge para responsável */
+.responsible-badge {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+}
+
+/* Card de regras */
+.rules-card {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+/* Contador de participantes */
+.participant-counter {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Mensagem de status */
+.status-message {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 50;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.status-message.success {
+    background: #10b981;
+    color: white;
+}
+
+.status-message.error {
+    background: #ef4444;
+    color: white;
+}
+
+.status-message.warning {
+    background: #f59e0b;
+    color: white;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+}
+
+/* ==========================================================================
+   ESTILOS RESPONSIVOS
+   ========================================================================== */
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+    html {
+        font-size: 90%;
+    }
+
+    .status-message {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        left: 0.5rem;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   ESTILOS PARA ESTADOS ESPECIAIS
+   ========================================================================== */
+
+/* Loading state para botão de sorteio */
+.draw-btn-loading {
+    position: relative;
+    color: transparent;
+}
+
+.draw-btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Estado vazio para lista de participantes */
+.participants-empty {
+    text-align: center;
+    color: #9ca3af;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Destaque para responsável na lista */
+.participant-item.responsible {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 1px solid #f59e0b;
+    position: relative;
+}
+
+.participant-item.responsible::before {
+    content: "👑";
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   ESTILOS PARA MELHORIA DA EXPERIÊNCIA DO USUÁRIO
+   ========================================================================== */
+
+/* Focus states melhorados */
+input:focus, button:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+    ring-offset: 2px;
+}
+
+/* Transições suaves */
+button, input {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover states para botões */
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Estado desabilitado */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Success/Error states */
+.input-success {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+.input-error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* ==========================================================================
+   ESTILOS PARA ACESSIBILIDADE
+   ========================================================================== */
+
+/* Alto contraste para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible para navegação por teclado */
+.focus-visible:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   ESTILOS PARA PRINT/MEDIA
+   ========================================================================== */
+
+/* Otimizações para impressão */
+@media print {
+    .status-message,
+    button {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+}
+
+/* Dark mode preparation (caso seja implementado no futuro) */
+@media (prefers-color-scheme: dark) {
+    /* Preparado para futuras implementações de modo escuro */
+}

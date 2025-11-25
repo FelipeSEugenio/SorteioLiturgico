@@ -17,6 +17,14 @@ const resultList = document.getElementById('resultList');
 function initApp() {
     updateUI();
     lucide.createIcons();
+
+    // Show share button if Web Share API is supported
+    if (navigator.share) {
+        const shareBtn = document.getElementById('shareBtn');
+        if (shareBtn) {
+            shareBtn.classList.remove('hidden');
+        }
+    }
 }
 
 // Handle participant input
@@ -412,25 +420,50 @@ function showStatus(message, type) {
     }, 3000);
 }
 
-function saveScreenshot() {
+function handleScreenshot(action) {
     if (!currentDraw) {
         showStatus('Realize um sorteio primeiro!', 'error');
         return;
     }
-    
+
     const resultsSection = document.getElementById('results-section');
     if (!resultsSection) {
         showStatus('Não foi possível encontrar a seção de resultados.', 'error');
         return;
     }
-    
+
     html2canvas(resultsSection).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `sorteio_liturgico_${new Date().toISOString().split('T')[0]}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-        showStatus('Screenshot salvo!', 'success');
+        canvas.toBlob(function(blob) {
+            if (action === 'download') {
+                const link = document.createElement('a');
+                link.download = `sorteio_liturgico_${new Date().toISOString().split('T')[0]}.png`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                showStatus('Screenshot salvo!', 'success');
+            } else if (action === 'share') {
+                const file = new File([blob], `sorteio_liturgico_${new Date().toISOString().split('T')[0]}.png`, { type: 'image/png' });
+                shareImage(file);
+            }
+        }, 'image/png');
     });
+}
+
+async function shareImage(file) {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+            await navigator.share({
+                files: [file],
+                title: 'Resultado do Sorteio Litúrgico',
+                text: 'Confira o resultado do sorteio litúrgico.',
+            });
+            showStatus('Resultado compartilhado!', 'success');
+        } catch (error) {
+            console.error('Erro ao compartilhar:', error);
+            showStatus('Erro ao compartilhar o resultado.', 'error');
+        }
+    } else {
+        showStatus('Seu navegador não suporta o compartilhamento de arquivos.', 'warning');
+    }
 }
 
 function clearAll() {

@@ -158,9 +158,13 @@
         <!-- Actions Section -->
         <section class="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]">
             <div class="flex flex-wrap gap-3">
-                <button onclick="saveScreenshot()" class="flex-1 py-3 px-4 bg-gradient-to-r from-cobre to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-cobre transition-colors flex items-center justify-center gap-2">
+                <button onclick="handleScreenshot('download')" class="flex-1 py-3 px-4 bg-gradient-to-r from-cobre to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-cobre transition-colors flex items-center justify-center gap-2">
                     <i data-lucide="download"></i>
                     Salvar Screenshot
+                </button>
+                <button id="shareBtn" onclick="handleScreenshot('share')" class="hidden flex-1 py-3 px-4 bg-gradient-to-r from-azul-petroleo to-green-500 text-white rounded-lg hover:from-green-500 hover:to-azul-petroleo transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="share-2"></i>
+                    Compartilhar
                 </button>
                 <button onclick="clearAll()" class="flex-1 py-3 px-4 bg-gradient-to-r from-marrom-cafe to-gray-700 text-white rounded-lg hover:bg-marrom-terroso transition-colors flex items-center justify-center gap-2">
                     <i data-lucide="refresh-cw"></i>

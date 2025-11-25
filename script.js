@@ -216,34 +216,38 @@ function performFairDraw() {
     
     // 3. Atribuir monições com controle de conflitos
     const numberOfMonitions = readingAssignments.length + 1; // +1 para o evangelho
+    const admonitionAssigned = []; // Array para rastrear quem já recebeu monição
     
     for (let i = 0; i < numberOfMonitions; i++) {
         let participant = shuffled[i % shuffled.length];
         let attempts = 0;
         let monitionName = '';
-        
-        // Definir nome da monição
+        let conflict = false;
+
+        // Definir nome da monição e verificar conflitos
         if (i < readingAssignments.length) {
-            // Monições das leituras
             monitionName = `${i + 1}ª Monição`;
-            
-            // Evitar conflito com leitura correspondente
-            while (assignedParticipants[`reading${i}`] === participant && attempts < shuffled.length) {
-                const alternativeIndex = (i + 1 + attempts) % shuffled.length;
-                participant = shuffled[alternativeIndex];
-                attempts++;
-            }
+            do {
+                conflict = (assignedParticipants[`reading${i}`] === participant) || admonitionAssigned.includes(participant);
+                if (conflict) {
+                    const alternativeIndex = (i + 1 + attempts) % shuffled.length;
+                    participant = shuffled[alternativeIndex];
+                    attempts++;
+                }
+            } while (conflict && attempts < shuffled.length);
         } else {
-            // Monição do Evangelho
             monitionName = 'Monição do Evangelho';
-            
-            // Evitar conflito com Evangelho
-            while (responsible === participant && attempts < shuffled.length) {
-                const alternativeIndex = (i + 1 + attempts) % shuffled.length;
-                participant = shuffled[alternativeIndex];
-                attempts++;
-            }
+            do {
+                conflict = (responsible === participant) || admonitionAssigned.includes(participant);
+                if (conflict) {
+                    const alternativeIndex = (i + 1 + attempts) % shuffled.length;
+                    participant = shuffled[alternativeIndex];
+                    attempts++;
+                }
+            } while (conflict && attempts < shuffled.length);
         }
+        
+        admonitionAssigned.push(participant); // Adiciona o participante à lista de monições atribuídas
         
         result.push({
             position: monitionName,
